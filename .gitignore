@@ -1,0 +1,6 @@
+# Dots
+.settings/
+.vscode/
+
+# Compiled
+target/

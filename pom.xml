@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.theLongLab</groupId>
+  <artifactId>PRESM</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+
+  <name>${project.artifactId}</name>
+  <description>PRESM</description>
+  <url>https://github.com/theLongLab/PRESM</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdk.version>1.8</jdk.version>
+    <mainClass>com.theLongLab.PRESM.CG</mainClass>
+  </properties>
+
+  <dependencies>
+    <!--
+      Change the following two dependencies if using custom folder structure when installing
+      3rd party JARs.
+    -->
+    <dependency>
+      <groupId>com.github.samtools</groupId>
+      <artifactId>htsjdk</artifactId>
+      <version>2.9.1-13-g9d343e7-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.samtools</groupId>
+      <artifactId>sam</artifactId>
+      <version>1.99</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Source for source code JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Set compiler level -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Shade for Uber JAR with dependencies -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>${mainClass}</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
