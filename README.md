@@ -5,8 +5,8 @@ PRESM stands for Personalized Reference Editor for Somatic Mutation discovery. I
 ### Installation
 
 PRESM is a batteries-included JAR executable; therefore no installation is needed aside from Java 8.
-Please copy the executable presm.jar from releases and run it using the standard command for java package:
-`java [–Xmx] –jar presm.jar`
+Please download the executable PRESM.jar from the latest release and run it using the standard command for Java packages:
+`java [–Xmx] –jar PRESM.jar`
 
 
 ### Building From Source
@@ -16,7 +16,7 @@ Building the project from source will require Apache Maven 3.6.1. First, clone t
 git clone git@github.com:theLongLab/PRESM.git
 ```
 
-The dependency JARs must thenbe downloaded separately and installed to the local repository.
+The dependency JARs must then be downloaded separately and installed to the local repository.
 * [htsjdk](https://broadinstitute.jfrog.io/broadinstitute/simple/libs-snapshot-local/com/github/samtools/htsjdk/2.9.1-13-g9d343e7-SNAPSHOT/htsjdk-2.9.1-13-g9d343e7-20170330.202905-1.jar)
 * [sam](https://sourceforge.net/projects/picard/files/sam-jdk/1.99/sam-1.99.jar/download)
 
